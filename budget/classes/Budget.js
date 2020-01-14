@@ -34,6 +34,11 @@ class Budget {
         })
         return this.income-totalCosts-totalSubBudgets
     }
+
+    addSubBudgetUse(subDescr, descr, amount) {
+        let position = this.subBudgets.findIndex(element => element.descr === subDescr)
+        this.subBudgets[position].uses.push(descr,amount)
+    }
 }
 
 class Cost {

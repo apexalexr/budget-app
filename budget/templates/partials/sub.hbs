@@ -1,0 +1,12 @@
+{{#each subBudgets}}
+<table>
+    <tr><td>{{descr}}</td></tr>
+    {{#each uses}}
+        <tr>
+            <td>{{descr}}</td>
+            <td>{{amount}}</td>
+        </tr>
+    {{/each}}
+    <tr><td>{{allocated}}</td><td>{{remaining}}</td></tr>
+</table>
+{{/each}}
