@@ -1,4 +1,4 @@
-let SubBudget = require('./subBudget.js')
+// let SubBudget = require('./subBudget.js')
 
 class Budget {
     constructor(income, month, year) {
@@ -11,15 +11,11 @@ class Budget {
 
     addCost (descr, amount, isCat) {
         let temp  = new Cost(descr, amount, isCat)
-        if(isCat) {
-            this.subBudgets.push(temp)
-        } else {
-            this.costs.push(temp)
-        }
+        this.costs.push(temp)
     }
 
-    addSub(sub) {
-        let temp = sub;
+    addSub(descr, allocated) {
+        let temp = new SubBudget(descr,allocated);
         this.subBudgets.push(temp)
     }
 
@@ -37,19 +33,41 @@ class Budget {
 
     addSubBudgetUse(subDescr, descr, amount) {
         let position = this.subBudgets.findIndex(element => element.descr === subDescr)
-        this.subBudgets[position].uses.push(descr,amount)
+        this.subBudgets[position].addUse(descr,amount)
+    }
+
+    deleteSubBudgetUse(subDescr,descrPosition) {
+        let subPosition = this.subBudgets.findIndex(element => element.descr === subDescr)
+        this.subBudgets[subPosition].splice(descrPosition,1)
     }
 }
 
 class Cost {
-    constructor(descr, amount, isCat) {
+    constructor(descr, amount) {
         this.descr = descr
         this.amount = amount
-        this.isCat = isCat
-        if(isCat) {
-            let temp = new SubBudget(descr, amount);
-            return temp
-        }
+    }
+}
+
+class SubBudget {
+    constructor (descr,allocated) {
+        this.descr = descr;
+        this.allocated = allocated;
+        this.usage = [];
+        this.remaining = allocated;
+    }
+
+    addUse(descr, amount) {
+        this.usage.push({descr,amount});
+        this.remaining -= amount;
+    }
+
+    getAllocated () {
+        return this.allocated
+    }
+
+    getDescr() {
+        return this.descr
     }
 }
 

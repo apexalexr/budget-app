@@ -14,29 +14,21 @@ app.set('views',viewsPath)
 hbs.registerPartials(partialsPath)
 
 let newBudget = new Budget(3000);
-newBudget.addCost('rent', 250, false);
-newBudget.addCost('food', 200, true);
+newBudget.addCost('rent', 250);
+newBudget.addSub('food', 200);
+newBudget.addSub('range',100)
 newBudget.addSubBudgetUse('food', 'Seiwa', 5)
 newBudget.addSubBudgetUse('food', 'Seid', 5)
 console.log(newBudget)
 console.log("The remaining budget is ",newBudget.calculateRemaining())
-let {descr, allocated,uses,remaining} = newBudget.subBudgets[0]
-console.log(newBudget.subBudgets[0].uses)
+// let {descr, allocated,uses,remaining} = newBudget.subBudgets[0]
+console.log(newBudget.subBudgets[0].usage)
 
 
 app.get('/', function (req, res) {
     res.render('budget', {
-      // subDescr: newBudget.subBudgets[0].descr,
-      // subUseDescr: newBudget.subBudgets[0],
-      // subUseCost: newBudget.subBudgets[0],
-      // subAllocated: newBudget.subBudgets[0].allocated,
-      // subRemaining: newBudget.subBudgets[0].remaining
       subBudgets : newBudget.subBudgets
     })
   })
    
 app.listen(3000)
-
-
-
-
