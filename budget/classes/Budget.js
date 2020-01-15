@@ -1,5 +1,3 @@
-// let SubBudget = require('./subBudget.js')
-
 class Budget {
     constructor(income, month, year) {
         if(!income||!month||!year) {
