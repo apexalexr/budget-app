@@ -2,6 +2,10 @@
 
 class Budget {
     constructor(income, month, year) {
+        if(!income||!month||!year) {
+            throw new Error('Please fill in all the details')
+        }
+        
         this.month = month;
         this.year = year;
         this.income = income;
