@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "sethbs" :  "nodemon -e hbs"
+    "sethbs": "nodemon -e hbs"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "handlebars": "^4.7.2",
     "hbs": "^4.0.6",
+    "mongodb": "^3.5.0",
     "path": "^0.12.7",
     "walk": "^2.3.14"
   },
