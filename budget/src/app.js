@@ -51,7 +51,7 @@ hbs.registerPartials(partialsPath)
 
 app.post('/addBudget', function(req,res) {
   console.log(req.body)
-  res.status(200)
+  res.status(200).send('Success!')
 })
    
 app.listen(3000)
