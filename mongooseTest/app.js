@@ -9,9 +9,6 @@ db.once('open', function() {
   var kittySchema = new mongoose.Schema({
     name: String
   });
-//   var Kitten = mongoose.model('Kitten', kittySchema);
-//   var silence = new Kitten({ name: 'Silence' });
-//   console.log(silence.name);
 
   kittySchema.methods.speak = function () {
     var greeting = this.name
@@ -27,14 +24,12 @@ db.once('open', function() {
 
   fluffy.save(function (err, fluffy) {
     if (err) return console.error(err);
-    // fluffy.speak();
+    fluffy.speak();
   });
 
-//   Kitten.find(function (err, kittens) {
-//     if (err) return console.error(err);
-//     console.log(kittens);
-//   })
-
-//   Kitten.find({ name: /^fluff/ }, callback);
+  Kitten.find(function (err, kittens) {
+    if (err) return console.error(err);
+    console.log(kittens);
+  })
 
 });
