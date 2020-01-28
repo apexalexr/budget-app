@@ -6,6 +6,7 @@ var CostSchema = new Schema({
   amount : Number
 })
 var useSchema = new Schema({
+  date : Date,
   descr : String,
   amount : Number
 })
@@ -46,6 +47,12 @@ budgetSchema.methods.findIndex = function(array , descr) {
     })
   }
 }
+
+//Budget CRUD methods
+//Going to add some errors to budgets later
+
+
+
 
 //Cost Methods CRUD
 budgetSchema.methods.addCost = function(descr,amount) {

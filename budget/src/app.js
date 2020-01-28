@@ -1,14 +1,7 @@
 const Budget = require('../schema/schema.js')
 const express = require('express')
-const hbs = require('hbs')
-const path = require('path')
 const mongoose = require('mongoose')
 const app = express()
-
-//Path Definitions
-const publicDirectoryPath = path.join(__dirname, '../public')
-const viewsPath = path.join(__dirname,'../templates/views')
-const partialsPath = path.join(__dirname,'../templates/partials')
 
 //Connect to MongoClient Budget cluster
 const uri = "mongodb+srv://budget:budget@cluster0-6sw4j.mongodb.net/test?retryWrites=true&w=majority";
@@ -25,16 +18,17 @@ db.once('open', function () {
   console.log("Connection Open")
 })
 
-app.set('view engine', 'hbs')
-app.set('views',viewsPath)
-hbs.registerPartials(partialsPath)
-
 app.use(express.json())
 
+//BUDGET CRUD methods
 app.post('/addBudget', (req,res) => {
   let tempBudget = new Budget(req.body)
   tempBudget.save()
   res.status(200).send('Success!')
+})
+app.delete('/deleteBudget', (req,res) => {
+  console.log(req.body._id)
+  Budget.deleteOne({_id : req.body._id}).then(res.status(200).send('in'))
 })
 
 //Cost CRUD methods
@@ -89,4 +83,6 @@ app.put('/updateCost',(req,res) => {
 
 
 //SubBudget CRUD Method Endpoints
+
+
 app.listen(3000)
