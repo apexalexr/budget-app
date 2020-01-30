@@ -21,6 +21,18 @@ db.once('open', function () {
 app.use(express.json())
 
 //BUDGET CRUD methods
+app.get('/getBudget/:_id', (req,res)=> {
+  // res.status(200).send(Budget.findById(req.params._id))
+  // let tempBudget = Budget.findById(req.params._id,{lean : true}, (err, res) => {
+  //   console.log(res)
+  // })
+  Budget.findById(req.params._id, '', {lean : true}, function (err, doc) {
+    res.send(doc)
+  })
+  
+  // console.log(tempBudget)
+  // res.status(200).send(tempBudget)
+})
 app.post('/addBudget', (req,res) => {
   let tempBudget = new Budget(req.body)
   tempBudget.save()

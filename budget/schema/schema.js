@@ -27,33 +27,29 @@ var budgetSchema = new Schema({
 })
 
 //Custom Array Searching and Unique Checking
-budgetSchema.methods.uniqueCheck = function(array , descr) {
-  if(array === "cost") {
-    return (this.findIndex(array,descr) == -1)
-  } else if(array === "sub") {
-    return (this.findIndex(array,descr) == -1)
+  budgetSchema.methods.uniqueCheck = function(array , descr) {
+    if(array === "cost") {
+      return (this.findIndex(array,descr) == -1)
+    } else if(array === "sub") {
+      return (this.findIndex(array,descr) == -1)
+    }
   }
-}
 
-budgetSchema.methods.findIndex = function(array , descr) {
-  if(array === "cost") {
-    return this.costs.findIndex((element)=> {
-      return (element.descr === descr)
-    })
-  } else if(array === "sub") {
-    //change to subs
-    return this.sub_budgets.findIndex((element)=> {
-      return (element.descr === descr)
-    })
+  budgetSchema.methods.findIndex = function(array , descr) {
+    if(array === "cost") {
+      return this.costs.findIndex((element)=> {
+        return (element.descr === descr)
+      })
+    } else if(array === "sub") {
+      //change to subs
+      return this.sub_budgets.findIndex((element)=> {
+        return (element.descr === descr)
+      })
+    }
   }
-}
 
 //Budget CRUD methods
 //Going to add some errors to budgets later
-
-
-
-
 //Cost Methods CRUD
 budgetSchema.methods.addCost = function(descr,amount) {
   if(!this.uniqueCheck("cost", descr)) {
@@ -94,42 +90,20 @@ budgetSchema.methods.updateCost = function(descr,amount) {
 }
 
 //SubBudget Methods
-budgetSchema.methods.addCost = function(descr,amount) {
-  if(!this.uniqueCheck("cost", descr)) {
-    return null;
-  }
-  this.costs.push({descr,amount})
-  this.save()
-  return true;
+budgetSchema.methods.addSub = function() {
+  
 }
 
-budgetSchema.methods.getCost = function(descr) {
-  let index = this.findIndex("cost",descr)
-  if(index == -1) {
-    console.log("No cost named " + descr + " found!")
-    return null;
-  }
-  return this.costs[index]
+budgetSchema.methods.getSub = function() {
+  
 }
 
-budgetSchema.methods.deleteCost = function(descr) {
-  let index = this.findIndex("cost",descr)
-  if(index == -1) {
-    return null
-  }
-  this.costs.splice(index,1)
-  this.save()
-  return true
+budgetSchema.methods.updateSub = function() {
+  
 }
 
-budgetSchema.methods.updateCost = function(descr,amount) {
-  let index = this.findIndex("cost",descr)
-  if(index == -1) {
-    return null
-  }
-  this.costs[index] = {descr,amount}
-  this.save()
-  return true
+budgetSchema.methods.deleteSub = function() {
+  
 }
 
 var Budget = mongoose.model('Budget', budgetSchema)
