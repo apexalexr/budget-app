@@ -1,20 +1,30 @@
-import React from "react";
-const axios = require('axios').default;
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Budget from './components/budget.js'
+import data from './test.json'
 
-class App extends Component {
-  componentDidMount() {
-    fetch('http://localhost:3000/getBudget/5e31b2150393b87862452bd0')
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ budget: data })
-    })
-    .catch(console.log)
-  }
+function App() {
+  return (
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <p>
+    //       Edit <code>src/App.js</code> and save to reload.
+    //     </p>
+    //     <a
+    //       className="App-link"
+    //       href="https://reactjs.org"
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //     >
+    //       Learn React
+    //       <Budget />
+    //     </a>
+    //   </header>
+    // </div>
+    <Budget data={data}/>
+  );
 }
 
-export default () => (
-  <>
-    <h1>Welcome to React Parcel Micro App!</h1>
-    <p>Hard to get more minimal than this React app.</p>
-  </>
-);
+export default App;

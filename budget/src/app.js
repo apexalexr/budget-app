@@ -20,7 +20,7 @@ db.once('open', function () {
 
 app.use(express.json())
 
-//BUDGET CRUD methods
+//BUDGET CRUD method Endpoints
 app.get('/getBudget/:_id', (req,res)=> {
   // res.status(200).send(Budget.findById(req.params._id))
   // let tempBudget = Budget.findById(req.params._id,{lean : true}, (err, res) => {
@@ -43,7 +43,10 @@ app.delete('/deleteBudget', (req,res) => {
   Budget.deleteOne({_id : req.body._id}).then(res.status(200).send('in'))
 })
 
-//Cost CRUD methods
+
+
+
+//Cost CRUD method Endpoints
 app.put('/addCost', (req,res) => {
   Budget.findOne({_id : req.body._id}, (err,budget) => {
     if(err) console.error(err)
