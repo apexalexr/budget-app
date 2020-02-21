@@ -27,9 +27,7 @@ class Budget extends React.Component {
 				<div>{this.renderCost(1)}</div>
 				<div>{this.renderCost(1)}</div>
 				{
-					for (var i = costs.length - 1; i >= 0; i--) {
-						
-					}
+					
 				}
 				<div>{JSON.stringify(this.props.data.costs)}</div>
 			</>
