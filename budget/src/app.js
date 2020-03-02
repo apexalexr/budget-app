@@ -98,6 +98,15 @@ app.put('/updateCost',(req,res) => {
 
 
 //SubBudget CRUD Method Endpoints
-
+app.put('/addSub',(req,res) => {
+  Budget.findOne({_id : req.body._id}, (err,budget) => {
+    if(err) console.error(err)
+    if(budget.addSub(req.body.descr,req.body.allocated)) {
+      res.status(200).send("Cost " + req.body.descr + " has been updated.")
+    } else {
+      res.status(404).send("Cost not found")
+    } 
+  })
+})
 
 app.listen(3000)

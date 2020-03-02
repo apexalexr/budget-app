@@ -90,8 +90,13 @@ budgetSchema.methods.updateCost = function(descr,amount) {
 }
 
 //SubBudget Methods
-budgetSchema.methods.addSub = function() {
-  
+budgetSchema.methods.addSub = function(descr, allocated) {
+  if(!this.uniqueCheck('sub',descr)) {
+    return;
+  }
+  this.sub_budgets.push({descr,allocated,remaining : allocated})
+  this.save()
+  return true;
 }
 
 budgetSchema.methods.getSub = function() {
