@@ -3,13 +3,15 @@ import React from 'react';
 import './App.css';
 import Budget from './components/budget.js'
 import data from './test.json'
-import SubBudget from './componente/subbudget.js'
+import SubBudget from './components/subbudget.js'
 
 function App() {
   console.log("starting app")
   return (
+    <>
       <Budget data={data}/>
       <SubBudget />
+    </>
     );
 }
 

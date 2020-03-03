@@ -1,6 +1,7 @@
 const Budget = require('../schema/schema.js')
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const app = express()
 
 //Connect to MongoClient Budget cluster
@@ -18,6 +19,7 @@ db.once('open', function () {
   console.log("Connection Open")
 })
 
+app.use(cors())
 app.use(express.json())
 
 //BUDGET CRUD method Endpoints
@@ -26,7 +28,9 @@ app.get('/getBudget/:_id', (req,res)=> {
   // let tempBudget = Budget.findById(req.params._id,{lean : true}, (err, res) => {
   //   console.log(res)
   // })
+  console.log('Looking')
   Budget.findById(req.params._id, '', {lean : true}, function (err, doc) {
+    console.log('Found')
     res.send(doc)
   })
   
@@ -109,4 +113,4 @@ app.put('/addSub',(req,res) => {
   })
 })
 
-app.listen(3000)
+app.listen(3001)

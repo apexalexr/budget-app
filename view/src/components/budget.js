@@ -28,10 +28,11 @@ class Budget extends React.Component {
 	componentDidMount() {
 		axios({
 			method: 'get',
-			url: 'http://localhost:3000/getBudget/5e31b2150393b87862452bd0/',
+			url: 'http://localhost:3001/getBudget/5e31b2150393b87862452bd0/',
 			responseType: 'json'
 		}).then(function (response) {
 			// handle success
+			console.log(response.data)
 			return response.data
 		}).then((responseData) => {
 		  this.setState({data : responseData, loaded : true})
