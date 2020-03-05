@@ -1,7 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 
-function Sub(props) {
+function SubTitle(props) {
+    return(
+        <>
+        </>
+    )
+}
+
+function SubDescrList(props) {
+    return(
+        <>
+        </>
+    )
+}
+
+function SubRemaining(props) {
     return(
         <>
         </>
@@ -42,8 +56,8 @@ class SubBudget extends React.Component {
             let subDescrList = []
             let subRemainingList = []
             for (var i = subs.length - 1; i >= 0; i--) {
-                subDescrList.push(<td>{subs[i].descr} ${subs[i].allocated}</td>)
-                subRemainingList.push(<td>Remaining ${subs[i].remaining}</td>)
+                subDescrList.push(<><td>{subs[i].descr}</td> <td>${subs[i].allocated}</td></>)
+                subRemainingList.push(<><td>Remaining</td><td>${subs[i].remaining}</td></>)
 			}
             return(				<>
                 <table>
