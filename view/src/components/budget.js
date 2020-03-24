@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 function Cost(props) {
 	return(
@@ -12,26 +13,66 @@ function Cost(props) {
 class Budget extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			data : null,
+			loaded : false
+		}
 	}
+
 	renderCost(i) {
 		return(
 			<Cost value = {i}/>
 		)
 	}
-	render() {
-	const costs = this.props.data.costs;
-	const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-		let costList = []
-		for (var i = costs.length - 1; i >= 0; i--) {
-			costList.push(<tr><td>{costs[i].descr}</td><td>${costs[i].amount.$numberInt}</td></tr>)
+
+	componentDidMount() {
+		axios({
+			method: 'get',
+			url: 'http://localhost:3001/getBudget/5e31b2150393b87862452bd0/',
+			responseType: 'json'
+		}).then(function (response) {
+			// handle success
+			console.log(response.data)
+			return response.data
+		}).then((responseData) => {
+		  this.setState({data : responseData, loaded : true})
 		}
-		return(
-			<>
-				<div>{monthNames[this.props.data.month.$numberInt-1]} {this.props.data.year.$numberInt} Budget</div>
-				{costList}
-				<div>{JSON.stringify(this.props.data)}</div>
-			</>
+		).catch(function (error) {
+			// handle error
+			console.log(error);
+		}).finally(
 		)
+	}
+
+
+	render() {
+		console.log(this.state.data)
+		const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+
+		if(this.state.loaded === true) {
+			const costs = this.state.data.costs;
+			let costList = []
+			for (var i = costs.length - 1; i >= 0; i--) {
+				costList.push(<tr key={i}><td>{costs[i].descr}</td><td>${costs[i].amount}</td></tr>)
+			}
+			return(
+				<>
+					<table>
+						<tbody>
+							<tr>
+								<td>{monthNames[this.props.data.month-1]}</td>
+								<td>{this.props.data.year} Budget</td>
+							</tr>
+							{costList}
+						</tbody>
+					</table>
+				</>
+			)
+		} else {
+			return(
+				<>Loading</>
+			)
+		}
 	}
 }
 
